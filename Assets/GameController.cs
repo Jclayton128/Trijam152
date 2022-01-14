@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
         uic.SetCurrentContext(UI_Controller.UI_Context.StartMenu);
         ah = GetComponent<ArenaHelper>();
         lc = GetComponent<LevelController>();
+        
     }
 
     #region Button Handlers
@@ -58,6 +59,10 @@ public class GameController : MonoBehaviour
         return ah;
     }
 
+    public UI_Controller GetUI_Controller()
+    {
+        return uic;
+    }
     #endregion
 
 }

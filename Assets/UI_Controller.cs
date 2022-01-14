@@ -11,11 +11,12 @@ public class UI_Controller : MonoBehaviour
     CinemachineVirtualCamera cvc;
 
     [SerializeField] Panel[] allPanels = null;
-    [SerializeField] Panel StartPanel = null;
+    public Panel StartPanel = null;
+    public CombatPanel CombatPanel = null;
 
     //state
     UI_Context context;
-    void Start()
+    void Awake()
     {
         cvc = Camera.main.GetComponentInChildren<CinemachineVirtualCamera>();
         foreach (var panel in allPanels)
@@ -28,6 +29,7 @@ public class UI_Controller : MonoBehaviour
     public void SetCurrentContext(UI_Context newContext)
     {
         context = newContext;
+
         foreach (var panel in allPanels)
         {
             panel.ShowHideElements(false);
@@ -41,6 +43,7 @@ public class UI_Controller : MonoBehaviour
 
             case UI_Context.InGame:
                 cvc.Follow = GameController.GetGameController().GetPlayer().transform;
+                CombatPanel.ShowHideElements(true);
                 return;
         }
 
