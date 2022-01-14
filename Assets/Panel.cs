@@ -12,7 +12,6 @@ public class Panel : MonoBehaviour
         {
             elements.Add(transform.GetChild(i).gameObject);
         }
-        Debug.Log($"elements length: {elements.Count}");
     }
 
     public void ShowHideElements(bool shouldShow)

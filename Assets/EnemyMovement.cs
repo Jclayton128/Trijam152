@@ -29,4 +29,9 @@ public class EnemyMovement : MonoBehaviour
         rb.AddForce(moveInput * moveForce, ForceMode2D.Impulse);
 
     }
+
+    public void SetInput(Vector2 newInput)
+    {
+        moveInput = newInput;
+    }
 }

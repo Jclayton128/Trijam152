@@ -18,7 +18,11 @@ public class UI_Controller : MonoBehaviour
     void Start()
     {
         cvc = Camera.main.GetComponentInChildren<CinemachineVirtualCamera>();
-        
+        foreach (var panel in allPanels)
+        {
+            panel.gameObject.SetActive(true);
+        }
+
     }
 
     public void SetCurrentContext(UI_Context newContext)
