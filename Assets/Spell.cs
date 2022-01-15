@@ -7,9 +7,9 @@ public class Spell : ScriptableObject
     [SerializeField] Sprite spellIcon = null;
     [SerializeField] GameObject generatedPrefab = null;
 
-    public enum SpellType { SummonTree};
+    public enum SpellType { SummonMountain, SummonSkeleton, LightningBolt};
 
-    [SerializeField] SpellType spellType = SpellType.SummonTree;
+    [SerializeField] SpellType spellType = SpellType.SummonMountain;
     [SerializeField] int spellCost = 0;
 
     public Sprite GetSpellIcon()

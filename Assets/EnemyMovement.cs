@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
     Rigidbody2D rb;
 
     //param
-    public float moveForce = 1f;
+    public float moveForce = 0.2f;
 
     //state
     Vector2 moveInput = Vector2.zero;

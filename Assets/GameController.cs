@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     Vector2 playerStartLocation = Vector2.zero;
 
     //state
-    bool isInGame = false;
+    public bool isInGame = false;
 
     public Action OnGameStart;
     
@@ -39,6 +39,10 @@ public class GameController : MonoBehaviour
 
     }
 
+    public void HandleReturnToStartMenu()
+    {
+        uic.SetCurrentContext(UI_Controller.UI_Context.StartMenu);
+    }
     #endregion
 
 
@@ -62,6 +66,19 @@ public class GameController : MonoBehaviour
     public UI_Controller GetUI_Controller()
     {
         return uic;
+    }
+
+    public LevelController GetLevelController()
+    {
+        return lc;
+    }
+    public void LoseGame()
+    {
+        isInGame = false;
+        Destroy(player);
+        lc.DestroyAllEnemies();
+        uic.EndPanel.SetRunText();
+        uic.SetCurrentContext(UI_Controller.UI_Context.Endgame);
     }
     #endregion
 

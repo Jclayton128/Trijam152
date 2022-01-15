@@ -13,7 +13,9 @@ public class EnemyBrain : MonoBehaviour
     private float closeEnough = 1.0f;
 
     //state
+    Transform playerTransform;
     bool seesPlayer = false;
+    bool metInitialDest = false;
     Vector2 destination = Vector2.zero;
     Vector2 dirToDest = Vector2.zero;
     float distToDest = 0;
@@ -22,22 +24,21 @@ public class EnemyBrain : MonoBehaviour
     {
         ah = GameController.GetGameController().GetArenaHelper();
         em = GetComponent<EnemyMovement>();
-
+        playerTransform = GameController.GetGameController().GetPlayer().transform;
         destination = ah.GetRandomReachablePoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateNavData();
 
-        if (!seesPlayer)
-        {
-            NavigateRandomly();
-        }
+        destination = playerTransform.position;
+
+        UpdateNavData();
 
         Debug.DrawLine(transform.position, destination, Color.green);
 
+        
         ConvertDesiresToMovement();
     }
 
@@ -45,14 +46,6 @@ public class EnemyBrain : MonoBehaviour
     {
         dirToDest = destination - (Vector2)transform.position;
         distToDest = dirToDest.magnitude;
-    }
-
-    private void NavigateRandomly()
-    {
-        if (distToDest < closeEnough)
-        {
-            destination = ah.GetRandomReachablePoint();
-        }
     }
 
     private void ConvertDesiresToMovement()

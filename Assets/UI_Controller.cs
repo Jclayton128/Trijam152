@@ -6,13 +6,14 @@ using Cinemachine;
 
 public class UI_Controller : MonoBehaviour
 {
-    public enum UI_Context {StartMenu, InGame};
+    public enum UI_Context {StartMenu, InGame, Endgame};
 
     CinemachineVirtualCamera cvc;
 
     [SerializeField] Panel[] allPanels = null;
     public Panel StartPanel = null;
     public CombatPanel CombatPanel = null;
+    public EndPanel EndPanel = null;
 
     //state
     UI_Context context;
@@ -44,6 +45,10 @@ public class UI_Controller : MonoBehaviour
             case UI_Context.InGame:
                 cvc.Follow = GameController.GetGameController().GetPlayer().transform;
                 CombatPanel.ShowHideElements(true);
+                return;
+
+            case UI_Context.Endgame:
+                EndPanel.ShowHideElements(true);
                 return;
         }
 

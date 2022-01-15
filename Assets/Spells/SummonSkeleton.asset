@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ce79ff54e3965048975c8fa5ac3b3ec, type: 3}
-  m_Name: SummonTree
+  m_Name: SummonSkeleton
   m_EditorClassIdentifier: 
-  spellIcon: {fileID: 4363377110094588146, guid: 1fa28411659ee7e40a9e7af45c7b3f8f, type: 3}
-  generatedPrefab: {fileID: 0}
-  spellType: 0
+  spellIcon: {fileID: -7308292388938493882, guid: 107bd96f8f446344da022b0e1c0e912e, type: 3}
+  generatedPrefab: {fileID: 5414637490022113648, guid: 2fcde1b9d7ff1eb44abf91d2fa88d12a, type: 3}
+  spellType: 1
+  spellCost: 20

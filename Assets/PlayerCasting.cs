@@ -51,6 +51,7 @@ public class PlayerCasting : MonoBehaviour
     private void ListenForMouse()
     {
         ListenForSpellScrolling();
+        ListenForMouseClick();
     }
 
     private void ListenForSpellScrolling()
@@ -74,6 +75,56 @@ public class PlayerCasting : MonoBehaviour
             }
         }
         cp.HighlightSelectedSpell(selectedSpellIndex);
+    }
+
+    private void ListenForMouseClick()
+    {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            Spell.SpellType currentSpell = possibleSpells[selectedSpellIndex].GetSpellType();
+            Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            switch (currentSpell)
+            {
+                case Spell.SpellType.SummonMountain:
+                    if (currentMana < possibleSpells[selectedSpellIndex].GetSpellCost())
+                    {
+                        return;
+                    }
+                    
+                    FadeHandler fh = Instantiate(possibleSpells[selectedSpellIndex].GetSpellPrefab(), clickPos, Quaternion.identity).GetComponent<FadeHandler>();
+                    fh.SetLifetime(10f);
+                    currentMana -= possibleSpells[selectedSpellIndex].GetSpellCost();
+                    cp.SetManaBar(currentMana / maxMana);
+                    return;
+
+                case Spell.SpellType.SummonSkeleton:
+                    if (currentMana < possibleSpells[selectedSpellIndex].GetSpellCost())
+                    {
+                        return;
+                    }
+                    FadeHandler fh2 = Instantiate(possibleSpells[selectedSpellIndex].GetSpellPrefab(), clickPos, Quaternion.identity).GetComponent<FadeHandler>();
+                    fh2.SetLifetime(60f);
+                    currentMana -= possibleSpells[selectedSpellIndex].GetSpellCost();
+                    cp.SetManaBar(currentMana / maxMana);
+                    return;
+
+                case Spell.SpellType.LightningBolt:
+                    if (currentMana < possibleSpells[selectedSpellIndex].GetSpellCost())
+                    {
+                        return;
+                    }
+                    FadeHandler fh3 = Instantiate(possibleSpells[selectedSpellIndex].GetSpellPrefab(), transform.position, Quaternion.identity).GetComponent<FadeHandler>();
+                    Vector2 dir = clickPos - (Vector2)transform.position;
+                    fh3.GetComponent<Rigidbody2D>().velocity = dir.normalized * 7f;                    
+                    fh3.SetLifetime(6f);
+                    currentMana -= possibleSpells[selectedSpellIndex].GetSpellCost();
+                    cp.SetManaBar(currentMana / maxMana);
+                    return;
+
+
+
+            }
+        }
     }
 
     private void RegainMana()
